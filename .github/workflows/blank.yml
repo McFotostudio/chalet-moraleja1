@@ -1,0 +1,24 @@
+name: Descomprimir y desplegar
+
+on: 
+  push:
+    branches:
+      - main
+
+jobs:
+  unzip:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonar el repositorio
+        uses: actions/checkout@v2
+
+      - name: Unir y descomprimir partes
+        run: |
+          cat app-file.zip app-file.z01 app-file.z02
+          unzip completo.zip -d .
+
+      - name: Subir archivos descomprimidos
+        uses: actions/upload-artifact@v2
+        with:
+          name: archivos-descomprimidos
+          path: ./
